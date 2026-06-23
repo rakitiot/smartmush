@@ -22,7 +22,7 @@ function initChart() {
     });
 }
 
-/function syncDashboard() {
+function syncDashboard() {
     fetch('/get_web_data')
         .then(res => res.json())
         .then(data => {
