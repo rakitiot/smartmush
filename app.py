@@ -4,7 +4,11 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-DB_FILE = "smartmush_db.db"
+# Cek apakah aplikasi berjalan di server Vercel atau komputer lokal
+if os.environ.get('VERCEL'):
+    DB_FILE = "/tmp/smartmush_db.db"
+else:
+    DB_FILE = "smartmush_db.db"
 
 # Inisialisasi Database Lokal python app.py di terminal atau di cmd
 def init_db():
