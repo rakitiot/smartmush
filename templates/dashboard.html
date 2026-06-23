@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTMUSH - Smart Agrikultur Jamur Berbasis IoT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="main-header">
+  <div class="header-left">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo SMARTMUSH" class="header-logo">
+    <div class="header-title-wrapper">
+      <h1>SMARTMUSH</h1>
+      <p class="subtitle">Smart Agriculture Jamur Berbasis IoT</p>
+    </div>
+  </div>
+  
+  <div class="header-right">
+    <span class="status-badge status-online">
+      <span class="status-badge status-online" id="server-status">
+  <span class="dot"></span> Server: Online
+</span>
+    </span>
+    <span class="status-badge status-offline" id="esp-status">
+      <span class="dot"></span> ESP32: Off
+    </span>
+  </div>
+</header>
+
+    <div class="main-wrapper">
+        <section class="left-panel">
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Temperatur</h3>
+                    <div class="gauge-value" id="val-temp">0.0°C</div>
+                    <p class="setpoint-info">Target: <span id="lbl-tmin">24</span> - <span id="lbl-tmax">30</span>°C</p>
+                </div>
+                <div class="card">
+                    <h3>Kelembaban Udara</h3>
+                    <div class="gauge-value" id="val-hum">0%</div>
+                    <p class="setpoint-info">Target: <span id="lbl-hmin">80</span> - <span id="lbl-hmax">85</span>%</p>
+                </div>
+                <div class="card full-width-sm">
+                    <h3>Kelembaban Media Tanam (Soil)</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="fill-soil" style="width: 0%;"></div>
+                    </div>
+                    <div class="soil-meta">
+                        <span id="val-soil">0%</span>
+                        <span id="soil-alert" class="alert-text text-hidden">MEDIA KERING!</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Daya Lampu Penghangat</h3>
+                    <div class="status-row">
+                        <div>CH1: <strong id="val-lamp1">0%</strong></div>
+                        <div>CH2: <strong id="val-lamp2">0%</strong></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Status Humidifier</h3>
+                    <div id="status-humidifier" class="state-box box-off">OFF</div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>Grafik Riwayat Lingkungan Kumbung</h3>
+                <canvas id="mushChart" height="100"></canvas>
+            </div>
+        </section>
+
+        <section class="right-panel">
+            <div class="card settings-card">
+                <h3>Mode Sistem</h3>
+                <div class="mode-toggle-group">
+                    <button id="btn-mode-auto" onclick="setControlMode('auto')" class="btn-mode active">OTOMATIS</button>
+                    <button id="btn-mode-manual" onclick="setControlMode('manual')" class="btn-mode">MANUAL OVERRIDE</button>
+                </div>
+            </div>
+
+            <div id="manual-control-panel" class="card settings-card panel-disabled">
+                <h3>Kendali Manual Aktuator</h3>
+                <div class="control-group">
+                    <label>Humidifier:</label>
+                    <button id="btn-manual-hum" onclick="toggleManualHumidifier()" class="btn-action">TURN ON</button>
+                </div>
+                <div class="control-group">
+                    <label>Kecerahan Lampu CH1 (<span id="lbl-range-l1">0</span>%):</label>
+                    <input type="range" id="range-lamp1" min="0" max="99" value="0" oninput="updateManualHardware()">
+                </div>
+                <div class="control-group">
+                    <label>Kecerahan Lampu CH2 (<span id="lbl-range-l2">0</span>%):</label>
+                    <input type="range" id="range-lamp2" min="0" max="99" value="0" oninput="updateManualHardware()">
+                </div>
+            </div>
+
+            <div class="card settings-card">
+                <h3>Konfigurasi Batas Setpoint</h3>
+                <div class="form-group">
+                    <label>Suhu Min (°C)</label>
+                    <input type="number" step="0.1" id="inp-tmin">
+                </div>
+                <div class="form-group">
+                    <label>Suhu Ideal (°C)</label>
+                    <input type="number" step="0.1" id="inp-tideal">
+                </div>
+                <div class="form-group">
+                    <label>Suhu Maks (°C)</label>
+                    <input type="number" step="0.1" id="inp-tmax">
+                </div>
+                <div class="form-group">
+                    <label>Humidifier Min (%)</label>
+                    <input type="number" id="inp-hmin">
+                </div>
+                <div class="form-group">
+                    <label>Humidifier Maks (%)</label>
+                    <input type="number" id="inp-hmax">
+                </div>
+                <div class="form-group">
+                    <label>Batas Kering Soil (%)</label>
+                    <input type="number" id="inp-smin">
+                </div>
+                <button class="btn-save" onclick="saveSetpoints()">Simpan Setpoint</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>SMARTMUSH Dashboard | Sinkronisasi Terakhir: <span id="val-update">-</span></p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

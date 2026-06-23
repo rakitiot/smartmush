@@ -1,0 +1,274 @@
+:root {
+    --bg-dark: #161a17;             /* Hitam keabuan gelap industrial */
+    --card-dark: #1e2420;           /* Hijau-hitam sangat gelap untuk card */
+    --text-light: #f1f5f9;
+    --logo-green-dark: #2d4a36;     /* Hijau tua lingkaran daun logo */
+    --logo-green-light: #74c365;    /* Hijau terang tulisan SMARTMUSH */
+    --alert-red: #ef4444;
+    --border-color: #2b362f;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-light); padding: 20px; }
+
+/* Styling Global Header (Untuk Laptop/Tablet) */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #121612; /* Menyesuaikan tema gelap hijau kamu */
+  border-bottom: 2px solid #1f2d1f;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  height: 50px;
+  width: auto;
+}
+
+.header-title-wrapper h1 {
+  font-size: 22px;
+  color: #4caf50; /* Hijau cerah sesuai aksen webmu */
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.header-title-wrapper .subtitle {
+  font-size: 12px;
+  color: #a0aea0;
+  margin: 2px 0 0 0;
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+}
+
+/* Polesan badge status biar elegan berbentuk kapsul */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-online {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-offline {
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-online .dot { background-color: #4caf50; }
+.status-offline .dot { background-color: #f44336; }
+
+/* --- RESPONSIVE MOBILE FIX (Kunci Kerapian di HP) --- */
+@media (max-width: 600px) {
+  .main-header {
+    flex-direction: column; /* Ubah susunan dari kiri-kanan jadi atas-bawah */
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 15px;
+  }
+  
+  .header-right {
+    width: 100%;
+    justify-content: flex-start; /* Badge status berjejer rapi ke samping di bawah judul */
+    gap: 8px;
+  }
+  
+  .header-logo {
+    height: 40px; /* Sedikit mengecil di HP biar efisien tempat */
+  }
+  
+  .header-title-wrapper h1 {
+    font-size: 18px;
+  }
+  
+  .header-title-wrapper .subtitle {
+    font-size: 10px; /* Mencegah teks nabrak atau patah berantakan */
+  }
+  
+  .status-badge {
+    padding: 4px 10px; /* Ukuran teks status lebih kompak di layar HP */
+    font-size: 10px;
+  }
+  .grid-container { 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Membagi menjadi 2 kolom kiri-kanan */
+    gap: 10px; /* Jarak antar kotak diperkecil sedikit */
+    padding: 10px;
+  }
+
+  /* Card Status Humidifier dibuat melebar penuh di bawah grid 2 kolom */
+  .card-humidifier {
+    grid-column: span 2; 
+  }
+
+  /* --- 2. Polesan Ukuran Teks di Dalam Card --- */
+  .card h3 {
+    font-size: 11px; /* Judul card (TEMPERATUR, dll) dibuat lebih ringkas */
+    letter-spacing: 0.5px;
+  }
+
+  .card .value {
+    font-size: 24px; /* Ukuran angka sensor disesuaikan agar tidak terlalu raksasa di HP */
+  }
+
+  /* --- 3. Area Grafik Riwayat --- */
+  .chart-container {
+    padding: 10px;
+    margin: 10px;
+    background-color: #161b16;
+    border-radius: 8px;
+  }
+  
+  /* --- 4. Tombol Kendali Manual (Otomatis / Manual Override) --- */
+  .mode-selection-wrapper {
+    display: flex;
+    flex-direction: row; /* Tetap berjejer kiri kanan */
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .btn-mode {
+    flex: 1; /* Lebar tombol seimbang membagi dua */
+    padding: 12px 5px;
+    font-size: 12px;
+  }
+
+  /* --- 5. Form Konfigurasi Batas Setpoint --- */
+  .setpoint-form-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Di HP, input setpoint berbaris satu-satu ke bawah */
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .setpoint-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Label teks dan kotak input sejajar horizontal */
+    background: #1a221a;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+
+  .setpoint-group label {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .setpoint-group input {
+    width: 70px; /* Kotak input dibuat pas untuk angka saja */
+    text-align: center;
+    padding: 5px;
+    font-size: 13px;
+  }
+
+  .btn-submit-setpoint {
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+
+/* Styling Integrasi Logo & Brand Text */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-logo {
+    height: 65px; /* Menyesuaikan ukuran logo agar proporsional */
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-text h1 { 
+    color: var(--logo-green-light); 
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px; 
+    line-height: 1.1;
+}
+
+.brand-text p {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+.badge { padding: 4px 10px; border-radius: 4px; font-weight: bold; }
+.badge-success { background-color: var(--logo-green-light); color: #161a17; }
+.badge-error { background-color: var(--alert-red); color: #fff; }
+
+.main-wrapper { display: flex; gap: 20px; flex-wrap: wrap; }
+.left-panel { flex: 2; min-width: 600px; }
+.right-panel { flex: 1; min-width: 320px; }
+
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.card { background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+.chart-card { background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+.settings-card { text-align: left; margin-bottom: 15px; }
+
+.card h3, .chart-card h3 { color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.gauge-value { font-size: 2.8rem; font-weight: bold; color: var(--logo-green-light); margin: 10px 0; }
+.setpoint-info { font-size: 0.85rem; color: #64748b; }
+
+.progress-bar-container { background-color: #0f1210; border-radius: 20px; height: 20px; overflow: hidden; margin: 15px 0; border: 1px solid var(--border-color); }
+.progress-bar-fill { background-color: #38bdf8; height: 100%; transition: width 0.4s ease; }
+.soil-meta { display: flex; justify-content: space-between; font-weight: bold; }
+.alert-text { color: var(--alert-red); animation: blink 1s infinite; }
+.text-hidden { display: none; }
+
+.status-row { display: flex; justify-content: space-around; font-size: 1.1rem; margin-top: 10px; }
+.status-row strong { color: var(--logo-green-light); }
+.state-box { font-size: 1.8rem; font-weight: bold; padding: 8px; border-radius: 6px; margin-top: 5px; }
+.box-on { background-color: rgba(116, 195, 101, 0.15); color: var(--logo-green-light); border: 2px solid var(--logo-green-light); }
+.box-off { background-color: rgba(239, 68, 68, 0.1); color: var(--alert-red); border: 2px solid var(--alert-red); }
+
+/* Buttons & Inputs Form */
+.mode-toggle-group { display: flex; gap: 10px; }
+.btn-mode { flex: 1; padding: 10px; border: none; background: #2d3730; color: #fff; font-weight: bold; cursor: pointer; border-radius: 4px; }
+.btn-mode.active { background: var(--logo-green-light); color: #000; }
+.panel-disabled { opacity: 0.3; pointer-events: none; }
+
+.control-group, .form-group { margin-bottom: 12px; display: flex; flex-direction: column; }
+.control-group label, .form-group label { font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
+input[type="number"], input[type="range"] { padding: 8px; background: #131714; border: 1px solid var(--border-color); color: #fff; border-radius: 4px; }
+.btn-action, .btn-save { padding: 10px; background: #1e6b3f; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 5px; width: 100%; transition: background 0.2s; }
+.btn-action.active-run { background: var(--logo-green-light); color: black; }
+.btn-save:hover, .btn-action:hover { background: #25854e; }
+
+footer { text-align: center; color: #526257; font-size: 0.85rem; margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+@keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+

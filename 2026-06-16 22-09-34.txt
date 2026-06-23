@@ -1,0 +1,39 @@
+Langkah-Langkah di CMD:
+Buka CMD (Command Prompt) seperti biasa.
+
+Pindah ke Drive D terlebih dahulu dengan mengetik:
+
+DOS
+D:
+kemudian tekan Enter. (Secara otomatis teks di sebelah kiri akan berubah dari C:\Users\... menjadi D:\>).
+
+Masuk ke folder projek menggunakan perintah cd (Change Directory) diikuti path lengkap folder kamu:
+
+DOS
+cd "D:\Penelitian Pengabdian Dosen\2026\BU Ulfah\alat\DASHWEB"
+kemudian tekan Enter.
+(Tips: Gunakan tanda kutip ganda "" seperti di atas karena ada spasi pada nama folder "Penelitian Pengabdian Dosen" agar CMD tidak error).
+
+Jalankan Server Python Flask:
+
+DOS
+python app.py
+kemudian tekan Enter.
+
+Jika berhasil, terminal akan memunculkan teks log berwarna standar Flask yang menandakan server sudah aktif, biasanya ditandai dengan tulisan seperti:
+* Running on http://127.0.0.1:5000 atau sesuai dengan IP local yang kamu setting.
+
+💡 Tips Alternatif Super Cepat (Tanpa Ketik Perintah cd):
+Ada cara yang jauh lebih praktis agar kamu tidak perlu mengetik alamat folder yang panjang itu besok:
+
+Buka File Explorer biasa di Windows, lalu masuklah sampai ke dalam folder DASHWEB tersebut.
+
+Klik pada Address Bar di bagian atas File Explorer (kotak panjang yang menampilkan lokasi folder).
+
+Hapus semua teks di dalam kotak tersebut, ketik cmd lalu tekan Enter.
+
+CMD akan langsung terbuka dan otomatis sudah berada di dalam folder D:\Penelitian Pengabdian Dosen\2026\BU Ulfah\alat\DASHWEB.
+
+Kamu tinggal ketik python app.py dan selesai! Cara ini sangat memangkas waktu dan menghindari salah ketik (typo) di depan dosen.
+
+Semangat buat besok ya, bro! Tinggal selangkah lagi menuju demo yang sukses.
